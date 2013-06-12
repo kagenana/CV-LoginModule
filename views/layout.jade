@@ -1,0 +1,67 @@
+doctype 5
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/stylesheets/bootstrap.min.css" ,type="text/css")
+    link(rel="stylesheet", href="/stylesheets/bootstrap-responsive.min.css" ,type="text/css")
+    link(rel="stylesheet", href="/stylesheets/style.css" ,type="text/css")
+    script(src="/javascripts/jquery.min.js", type="text/javascript")
+    script(src="/javascripts/jquery.validate.min.js", type="text/javascript")
+    script(src="/javascripts/bootstrap.min.js", type="text/javascript")
+  body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container
+          button.btn.btn-navbar(type="button",data-toggle="collapse",data-target=".nav-collapse")
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          .nav-collapse.collapse
+            ul.nav
+              li.active
+                a(href="/") Home
+              li
+                a(href="/user/") User
+              if (isAdmin)
+                li.dropdown
+                  a(class="dropdown-toggle", id="dLabel", role="button", data-toggle="dropdown", data-target="#", href="admin/#") Admin
+                    b.caret
+                  ul.dropdown-menu(role="menu", aria-labelledby="dLabel")
+                    li
+                      a(role="menuitem", tabindex="-1", href="/admin/account")
+                        i.icon-user
+                        |  Account Management
+                    li
+                      a(role="menuitem", tabindex="-1", href="/admin/server")
+                        i.icon-wrench
+                        |  Server Configuration
+                    li.divider(role="presentation")
+                    li
+                      a(role="menuitem", tabindex="-1", href="#VerInfo", data-toggle="modal")
+                        i.icon-info-sign
+                        |  Version Information
+            ul.nav.pull-right
+              li(style="text-align: right;")
+                a(role="menuitem", tabindex="-1", href="#", style="padding-right: 6px;")
+                  i.icon-user.icon-white
+              li
+                form.form.horisontal(method="post", action="/account", style="margin-top: 0px; margin-bottom: 0px; margin-top: 0px;padding-top: 4px;")
+                  .control-group(style=style="margin: 0px;")
+                    .control
+                      button.btn.btn-inverse.btn-mini(type="submit", name="_id", value="#{_id}") #{user}
+              li
+                a(href="/logout")
+                  i.icon-off.icon-white
+                  |  Logout
+    .modal.hide.fade(id="VerInfo", tabindex="-1", role="dialog", aria-labelledby="VerInfoLabel", aria-hidden="true")
+      .modal-header
+        button.close(type="button", data-dismiss="modal", aria-hidden="true")&times;
+        h3(id="VerInfoLabel") Version Information
+      .modal-body
+        h2 CV-MailForm
+        p Version.862a053bcd044df3c5a2a407cf963dabbfa4fd32
+        p
+         a(href="/https://github.com/kagenana/CV-MailForm", target="_blank") https://github.com/kagenana/CV-MailForm
+      .modal-footer
+        button.btn(data-dismiss="modal", aria-hidden="true") Close
+    block content
